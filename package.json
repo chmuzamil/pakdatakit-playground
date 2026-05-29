@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "pakdatakit": "file:../pakkdatakit",
+    "pakdatakit": "pakkdatakit",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.16.0"
