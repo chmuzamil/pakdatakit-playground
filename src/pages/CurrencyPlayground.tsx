@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
-import { formatLakh, formatPKR } from 'pakdatakit'
+import { amountInWords, formatLakh, formatPKR } from 'pakdatakit'
 import { Card } from '../components/Card'
 import { CodePreview } from '../components/CodePreview'
+import { CopyButton } from '../components/CopyButton'
 import { OutputRow } from '../components/OutputRow'
 import { PlaygroundShell } from '../components/PlaygroundShell'
 import { examples } from '../utils/examples'
@@ -24,17 +25,37 @@ export function CurrencyPlayground() {
     return formatLakh(amount)
   }, [input, amount])
 
+  const words = useMemo(() => {
+    if (!input.trim() || Number.isNaN(amount) || amount < 0) return null
+    return {
+      en: amountInWords(amount),
+      cheque: amountInWords(amount, { cheque: true }),
+      ur: amountInWords(amount, { language: 'ur' }),
+    }
+  }, [input, amount])
+
   const hasError = input.trim() !== '' && Number.isNaN(amount)
+  const shown = Number.isNaN(amount) ? 0 : amount
 
-  const code = `import { formatPKR, formatLakh } from "pakdatakit";
+  const code = `import { formatPKR, formatLakh, amountInWords } from "pakdatakit";
 
-formatPKR(${Number.isNaN(amount) ? 0 : amount});  // → "${pkr || 'Rs. 0'}"
-formatLakh(${Number.isNaN(amount) ? 0 : amount}); // → "${lakh || 'Rs. 0'}"`
+formatPKR(${shown});  // → "${pkr || 'Rs. 0'}"
+formatLakh(${shown}); // → "${lakh || 'Rs. 0'}"
+${
+  words
+    ? `amountInWords(${shown});
+// → "${words.en}"
+amountInWords(${shown}, { cheque: true });
+// → "${words.cheque}"
+amountInWords(${shown}, { language: "ur" });
+// → "${words.ur}"`
+    : '// amountInWords() needs an amount of zero or more'
+}`
 
   return (
     <PlaygroundShell
-      title="Currency Formatter"
-      description="Format Pakistani Rupee amounts with comma separators and lakh/crore conventions."
+      title="Currency & Amount in Words"
+      description="Format Pakistani Rupee amounts with lakh/crore conventions and write them in words for cheques, in English and Urdu."
       input={
         <Card title="Input" description="Amount in PKR (numeric).">
           <label htmlFor="amount-input" className="sr-only">
@@ -70,11 +91,39 @@ formatLakh(${Number.isNaN(amount) ? 0 : amount}); // → "${lakh || 'Rs. 0'}"`
             <>
               <OutputRow label="formatPKR()" value={pkr} />
               <OutputRow label="formatLakh()" value={lakh} />
+              {words && (
+                <div className="mt-4 space-y-3 border-t border-border pt-4">
+                  <p className="text-xs font-semibold tracking-wider text-text-muted uppercase">
+                    In words
+                  </p>
+                  <WordsBlock label="English" text={words.en} />
+                  <WordsBlock label="Cheque" text={words.cheque} />
+                  <WordsBlock label="Urdu" text={words.ur} rtl />
+                </div>
+              )}
             </>
           )}
         </Card>
       }
       code={<CodePreview code={code} />}
     />
+  )
+}
+
+function WordsBlock({ label, text, rtl = false }: { label: string; text: string; rtl?: boolean }) {
+  return (
+    <div>
+      <div className="mb-1 flex items-center justify-between">
+        <span className="text-xs text-text-muted">{label}</span>
+        <CopyButton value={text} />
+      </div>
+      <p
+        dir={rtl ? 'rtl' : undefined}
+        lang={rtl ? 'ur' : undefined}
+        className={`text-sm leading-relaxed text-text-heading ${rtl ? 'text-right text-base' : ''}`}
+      >
+        {text}
+      </p>
+    </div>
   )
 }

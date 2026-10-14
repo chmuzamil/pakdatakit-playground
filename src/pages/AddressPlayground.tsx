@@ -38,7 +38,7 @@ formatAddress(parsed); // → "${escapeForCode(formatted || '')}"`
       title="Address Parser"
       description="Parse free-form Pakistani addresses into structured components and format them back."
       input={
-        <Card title="Input" description="Comma-separated mailing address.">
+        <Card title="Input" description="Free-form mailing address, with or without commas.">
           <label htmlFor="address-input" className="sr-only">
             Address
           </label>
@@ -50,7 +50,7 @@ formatAddress(parsed); // → "${escapeForCode(formatted || '')}"`
             className={textareaClassName}
           />
           <p className="mt-2 text-xs text-text-muted">
-            Try: House 12, Gulberg III, Lahore, Punjab 54660 · Street 5, 60000
+            Try: House 12, Gulberg III, Lahore, Punjab 54660 · 12 Model Town Lahore · House 1, Lahore, Sindh
           </p>
         </Card>
       }
@@ -69,6 +69,15 @@ formatAddress(parsed); // → "${escapeForCode(formatted || '')}"`
                 />
               ))}
               <OutputRow label="formatAddress()" value={formatted} mono={false} />
+              {parsed.warnings.length > 0 && (
+                <ul className="mt-3 space-y-1">
+                  {parsed.warnings.map((warning) => (
+                    <li key={warning} className="text-xs text-error">
+                      ⚠ {warning}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </>
           )}
         </Card>

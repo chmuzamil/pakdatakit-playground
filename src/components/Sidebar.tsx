@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 const navSections = [
   {
     label: 'Identity',
-    items: [{ to: '/cnic', label: 'CNIC Validator', icon: IdIcon }],
+    items: [{ to: '/cnic', label: 'CNIC Validator & Info', icon: IdIcon }],
   },
   {
     label: 'Phone & Messaging',
@@ -23,7 +23,7 @@ const navSections = [
   {
     label: 'Finance',
     items: [
-      { to: '/currency', label: 'Currency Formatter', icon: CurrencyIcon },
+      { to: '/currency', label: 'Currency & Words', icon: CurrencyIcon },
       { to: '/iban', label: 'IBAN Validator', icon: BankIcon },
     ],
   },

@@ -18,7 +18,7 @@ export function WhatsAppPlayground() {
 
   const link = useMemo(() => {
     if (!phone.trim()) return ''
-    return createWhatsAppLink(phone, message.trim() || undefined)
+    return createWhatsAppLink(phone, message.trim() || undefined) ?? ''
   }, [phone, message])
 
   const isValid = link.length > 0
@@ -26,7 +26,7 @@ export function WhatsAppPlayground() {
   const code = `import { createWhatsAppLink } from "pakdatakit";
 
 createWhatsAppLink("${escapeForCode(phone || examples.phone)}"${message.trim() ? `, "${escapeForCode(message)}"` : ''});
-// → "${link || ''}"`
+// → ${link ? `"${link}"` : 'null'}`
 
   return (
     <PlaygroundShell
