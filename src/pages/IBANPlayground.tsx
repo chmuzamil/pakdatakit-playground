@@ -1,11 +1,22 @@
 import { useMemo, useState } from 'react'
-import { getBankFromIBAN, validateIBAN } from 'pakdatakit'
+import { getBankInfo, validateIBAN, type BankType } from 'pakdatakit'
 import { Card } from '../components/Card'
 import { CodePreview } from '../components/CodePreview'
 import { OutputRow } from '../components/OutputRow'
 import { PlaygroundShell } from '../components/PlaygroundShell'
 import { ResultBadge } from '../components/ResultBadge'
 import { escapeForCode, examples, monoInputClassName } from '../utils/examples'
+
+const typeLabels: Record<BankType, string> = {
+  commercial: 'Commercial bank',
+  islamic: 'Islamic bank',
+  microfinance: 'Microfinance bank',
+  digital: 'Digital bank',
+  emi: 'Electronic money institution (wallet)',
+  foreign: 'Foreign bank (Pakistan branch)',
+  specialized: 'Specialized bank',
+  central: 'Central bank',
+}
 
 export function IBANPlayground() {
   const [input, setInput] = useState<string>(examples.iban)
@@ -15,20 +26,23 @@ export function IBANPlayground() {
     return validateIBAN(input)
   }, [input])
 
-  const bank = useMemo(() => {
-    if (!input.trim()) return null
-    return getBankFromIBAN(input)
-  }, [input])
+  const bank = useMemo(() => (input.trim() ? getBankInfo(input) : null), [input])
+  const shown = escapeForCode(input || examples.iban)
 
-  const code = `import { validateIBAN, getBankFromIBAN } from "pakdatakit";
+  const code = `import { validateIBAN, getBankInfo } from "pakdatakit";
 
-validateIBAN("${escapeForCode(input || examples.iban)}");     // → ${isValid}
-getBankFromIBAN("${escapeForCode(input || examples.iban)}"); // → ${bank ? `"${bank}"` : 'null'}`
+validateIBAN("${shown}"); // → ${isValid}
+getBankInfo("${shown}");
+// → ${
+    bank
+      ? `{ code: "${bank.code}", name: "${bank.name}", type: "${bank.type}", active: ${bank.active}${bank.mergedInto ? `, mergedInto: "${bank.mergedInto}"` : ''}${bank.aliasOf ? `, aliasOf: "${bank.aliasOf}"` : ''} }`
+      : 'null'
+  }`
 
   return (
     <PlaygroundShell
       title="IBAN Validator"
-      description="Validate Pakistani IBANs with mod-97 checksum and detect the issuing bank."
+      description="Validate Pakistani IBANs with the mod-97 checksum and see which bank issued them, what kind of bank it is and whether it still exists."
       input={
         <Card title="Input" description="24-character PK IBAN, with or without spaces.">
           <label htmlFor="iban-input" className="sr-only">
@@ -57,7 +71,22 @@ getBankFromIBAN("${escapeForCode(input || examples.iban)}"); // → ${bank ? `"$
               <div className="mb-4">
                 <ResultBadge valid={isValid} />
               </div>
-              <OutputRow label="Bank" value={bank ?? ''} mono={false} emptyText="Unknown bank" />
+              <OutputRow label="Bank" value={bank?.name ?? ''} mono={false} emptyText="Unknown bank" />
+              <OutputRow label="Bank code" value={bank?.code ?? ''} />
+              <OutputRow label="Type" value={bank ? typeLabels[bank.type] : ''} mono={false} />
+              <OutputRow
+                label="Status"
+                value={
+                  bank
+                    ? bank.mergedInto
+                      ? `Merged into ${bank.mergedInto}`
+                      : bank.aliasOf
+                        ? `Active (older code of ${bank.aliasOf})`
+                        : 'Active'
+                    : ''
+                }
+                mono={false}
+              />
             </>
           )}
         </Card>

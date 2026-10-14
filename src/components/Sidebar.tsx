@@ -6,6 +6,7 @@ const navSections = [
     items: [
       { to: '/cnic', label: 'CNIC Validator & Info', icon: IdIcon },
       { to: '/tax', label: 'NTN & STRN', icon: TaxIcon },
+      { to: '/forms', label: 'Form Inputs', icon: FormIcon },
     ],
   },
   {
@@ -29,7 +30,7 @@ const navSections = [
     items: [
       { to: '/currency', label: 'Currency & Words', icon: CurrencyIcon },
       { to: '/iban', label: 'IBAN Validator', icon: BankIcon },
-      { to: '/raast', label: 'Raast QR', icon: QrIcon },
+      { to: '/raast', label: 'Raast QR & Checker', icon: QrIcon },
     ],
   },
   {
@@ -91,7 +92,7 @@ export function Sidebar() {
           <code className="rounded bg-surface-overlay px-1 py-0.5 font-mono text-[11px] text-accent">
             pakdatakit
           </code>{' '}
-          npm package — 16 modules, 50+ utilities.
+          npm package — 17 modules, 60+ utilities.
         </p>
       </div>
     </aside>
@@ -230,6 +231,16 @@ function StarIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function FormIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3" y="5" width="18" height="5" rx="1.5" stroke="currentColor" strokeWidth="2" />
+      <rect x="3" y="14" width="18" height="5" rx="1.5" stroke="currentColor" strokeWidth="2" />
+      <path d="M7 7.5h4M7 16.5h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   )
 }

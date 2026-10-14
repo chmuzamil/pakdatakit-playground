@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
 import QRCode from 'qrcode'
-import { createRaastP2PQr, parseRaastQr } from 'pakdatakit'
+import {
+  createRaastP2PQr,
+  getBankInfo,
+  validateRaastQr,
+  type RaastQrError,
+  type RaastQrWarning,
+} from 'pakdatakit'
 import { Card } from '../components/Card'
 import { CodePreview } from '../components/CodePreview'
 import { CopyButton } from '../components/CopyButton'
@@ -16,9 +22,23 @@ import {
   textareaClassName,
 } from '../utils/examples'
 
+const errorText: Record<RaastQrError, string> = {
+  'not-a-raast-qr': 'Not a Pakistani payment QR code.',
+  'bad-checksum': 'The checksum does not match: the QR was damaged or its contents were edited.',
+  'no-iban': 'No IBAN found in the QR code.',
+  'invalid-iban': 'The IBAN in the QR code fails its checksum.',
+  expired: 'This QR code has expired.',
+  'missing-expiry': 'This QR code has an amount but no expiry, so banking apps reject it.',
+}
+
+const warningText: Record<RaastQrWarning, string> = {
+  'amount-ignored': 'It carries an amount that banking apps ignore; the payer must type it.',
+  'expires-soon': 'It expires within an hour.',
+}
+
 const tabs = [
   { id: 'create', label: 'Create P2P QR' },
-  { id: 'parse', label: 'Read a QR payload' },
+  { id: 'parse', label: 'Check a QR' },
 ] as const
 
 type Tab = (typeof tabs)[number]['id']
@@ -74,7 +94,12 @@ export function RaastPlayground() {
   }, [iban, amount, expiresAt, particulars])
 
   const parseInput = tab === 'parse' ? toParse : (created.payload ?? '')
-  const parsed = useMemo(() => (parseInput.trim() ? parseRaastQr(parseInput) : null), [parseInput])
+  const check = useMemo(
+    () => (parseInput.trim() ? validateRaastQr(parseInput) : null),
+    [parseInput],
+  )
+  const parsed = check?.qr ?? null
+  const bank = parsed?.iban ? getBankInfo(parsed.iban) : null
   const image = useQrImage(tab === 'create' ? created.payload : null)
 
   const code =
@@ -85,15 +110,19 @@ createRaastP2PQr({
   iban: "${escapeForCode(iban)}",${amount.trim() ? `\n  amount: ${amount},\n  expiresAt: new Date(${expiresAt.getFullYear()}, ${expiresAt.getMonth()}, ${expiresAt.getDate()}, 23, 59),` : ''}${particulars.trim() ? `\n  particulars: "${escapeForCode(particulars.trim())}",` : ''}
 });
 // → "${created.payload ?? ''}"`
-      : `import { parseRaastQr } from "pakdatakit";
+      : `import { validateRaastQr } from "pakdatakit";
 
-parseRaastQr(payload);
-// → ${parsed ? `{ kind: "${parsed.kind}", crcValid: ${parsed.crcValid}, iban: ${parsed.iban ? `"${parsed.iban}"` : 'null'}, amount: ${parsed.amount}${parsed.expiresAt ? `, expiresAt: "${parsed.expiresAt}"` : ''} }` : 'null'}`
+validateRaastQr(payload);
+// → ${
+          check
+            ? `{ valid: ${check.valid}, errors: [${check.errors.map((e) => `"${e}"`).join(', ')}], warnings: [${check.warnings.map((w) => `"${w}"`).join(', ')}], qr: ${parsed ? `{ kind: "${parsed.kind}", iban: ${parsed.iban ? `"${parsed.iban}"` : 'null'}, amount: ${parsed.amount}${parsed.expiresAt ? `, expiresAt: "${parsed.expiresAt}"` : ''} }` : 'null'} }`
+            : 'null'
+        }`
 
   return (
     <PlaygroundShell
       title="Raast QR"
-      description="Create and read payment QR codes following the State Bank of Pakistan's QR standard."
+      description="Create Raast payment QR codes, and check any Pakistani payment QR for tampering, expiry or a bad IBAN before paying."
       input={
         <>
           <TabBar tabs={tabs} active={tab} onChange={setTab} />
@@ -154,7 +183,7 @@ parseRaastQr(payload);
                 aria-label="QR payload"
                 value={toParse}
                 onChange={(e) => setToParse(e.target.value)}
-                placeholder="000202010211020230…"
+                placeholder="000202010211020200…"
                 spellCheck={false}
                 className={textareaClassName}
               />
@@ -193,17 +222,32 @@ parseRaastQr(payload);
               )}
               <div className="mb-4">
                 <ResultBadge
-                  valid={parsed?.crcValid ?? false}
-                  validLabel="Checksum OK"
-                  invalidLabel={parsed ? 'Checksum mismatch' : 'Not a Pakistan QR'}
+                  valid={check?.valid ?? false}
+                  validLabel="Safe to pay"
+                  invalidLabel="Do not pay"
                 />
               </div>
+              {check && (check.errors.length > 0 || check.warnings.length > 0) && (
+                <ul className="mb-4 space-y-1">
+                  {check.errors.map((error) => (
+                    <li key={error} className="text-sm text-error">
+                      ✕ {errorText[error]}
+                    </li>
+                  ))}
+                  {check.warnings.map((warning) => (
+                    <li key={warning} className="text-sm text-text-muted">
+                      ⚠ {warningText[warning]}
+                    </li>
+                  ))}
+                </ul>
+              )}
               <OutputRow
                 label="Kind"
                 value={parsed ? (parsed.kind === 'p2p' ? 'Person to person' : 'Merchant') : ''}
                 mono={false}
               />
               <OutputRow label="IBAN" value={parsed?.iban ?? ''} />
+              <OutputRow label="Bank" value={bank?.name ?? ''} mono={false} />
               <OutputRow label="Amount" value={parsed?.amount != null ? String(parsed.amount) : ''} />
               {parsed?.expiresAt && (
                 <OutputRow label="Expires" value={parsed.expiresAt.replace('T', ' ')} />

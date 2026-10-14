@@ -3,6 +3,7 @@ import { Layout } from './components/Layout'
 import { AddressPlayground } from './pages/AddressPlayground'
 import { CNICPlayground } from './pages/CNICPlayground'
 import { CurrencyPlayground } from './pages/CurrencyPlayground'
+import { FormInputsPlayground } from './pages/FormInputsPlayground'
 import { GeoPlayground } from './pages/GeoPlayground'
 import { HijriPlayground } from './pages/HijriPlayground'
 import { HolidaysPlayground } from './pages/HolidaysPlayground'
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="hijri" element={<HijriPlayground />} />
         <Route path="holidays" element={<HolidaysPlayground />} />
         <Route path="tax" element={<TaxPlayground />} />
+        <Route path="forms" element={<FormInputsPlayground />} />
         <Route path="numbers" element={<NumbersPlayground />} />
         <Route path="raast" element={<RaastPlayground />} />
       </Route>

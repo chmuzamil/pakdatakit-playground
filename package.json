@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
-    "pakdatakit": "^2.1.2",
+    "pakdatakit": "^2.2.0",
+    "pakdatakit-react": "^0.1.0",
     "qrcode": "^1.5.4",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
