@@ -3,12 +3,16 @@ import { NavLink } from 'react-router-dom'
 const navSections = [
   {
     label: 'Identity',
-    items: [{ to: '/cnic', label: 'CNIC Validator & Info', icon: IdIcon }],
+    items: [
+      { to: '/cnic', label: 'CNIC Validator & Info', icon: IdIcon },
+      { to: '/tax', label: 'NTN & STRN', icon: TaxIcon },
+    ],
   },
   {
     label: 'Phone & Messaging',
     items: [
       { to: '/phone', label: 'Phone Analyzer', icon: PhoneIcon },
+      { to: '/numbers', label: 'Landline & UAN', icon: PhoneIcon },
       { to: '/whatsapp', label: 'WhatsApp Link', icon: MessageIcon },
     ],
   },
@@ -25,6 +29,7 @@ const navSections = [
     items: [
       { to: '/currency', label: 'Currency & Words', icon: CurrencyIcon },
       { to: '/iban', label: 'IBAN Validator', icon: BankIcon },
+      { to: '/raast', label: 'Raast QR', icon: QrIcon },
     ],
   },
   {
@@ -32,6 +37,7 @@ const navSections = [
     items: [
       { to: '/text', label: 'Text Utils', icon: TextIcon },
       { to: '/hijri', label: 'Hijri Calendar', icon: CalendarIcon },
+      { to: '/holidays', label: 'Public Holidays', icon: StarIcon },
     ],
   },
 ] as const
@@ -85,7 +91,7 @@ export function Sidebar() {
           <code className="rounded bg-surface-overlay px-1 py-0.5 font-mono text-[11px] text-accent">
             pakdatakit
           </code>{' '}
-          npm package — 10 modules, 30+ utilities.
+          npm package — 16 modules, 50+ utilities.
         </p>
       </div>
     </aside>
@@ -196,6 +202,34 @@ function CalendarIcon() {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2" />
       <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function TaxIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M14 2v6h6M8 13h8M8 17h5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function QrIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="2" />
+      <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="2" />
+      <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="2" />
+      <path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function StarIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
     </svg>
   )
 }
