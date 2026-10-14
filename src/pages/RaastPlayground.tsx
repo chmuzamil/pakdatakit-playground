@@ -45,8 +45,17 @@ export function RaastPlayground() {
   const [tab, setTab] = useState<Tab>('create')
   const [iban, setIban] = useState<string>(examples.iban)
   const [amount, setAmount] = useState('1500')
-  const [particulars, setParticulars] = useState('Rent October')
+  const [validDays, setValidDays] = useState('30')
+  const [particulars, setParticulars] = useState('')
   const [toParse, setToParse] = useState('')
+
+  // QR codes with an amount must expire; this one stops working at 23:59 on the last day.
+  const expiresAt = useMemo(() => {
+    const date = new Date()
+    date.setDate(date.getDate() + Number(validDays))
+    date.setHours(23, 59, 0, 0)
+    return date
+  }, [validDays])
 
   const created = useMemo(() => {
     try {
@@ -54,7 +63,7 @@ export function RaastPlayground() {
       return {
         payload: createRaastP2PQr({
           iban,
-          ...(value !== undefined ? { amount: value } : {}),
+          ...(value !== undefined ? { amount: value, expiresAt } : {}),
           ...(particulars.trim() ? { particulars: particulars.trim() } : {}),
         }),
         error: null,
@@ -62,7 +71,7 @@ export function RaastPlayground() {
     } catch (error) {
       return { payload: null, error: (error as Error).message }
     }
-  }, [iban, amount, particulars])
+  }, [iban, amount, expiresAt, particulars])
 
   const parseInput = tab === 'parse' ? toParse : (created.payload ?? '')
   const parsed = useMemo(() => (parseInput.trim() ? parseRaastQr(parseInput) : null), [parseInput])
@@ -73,13 +82,13 @@ export function RaastPlayground() {
       ? `import { createRaastP2PQr } from "pakdatakit";
 
 createRaastP2PQr({
-  iban: "${escapeForCode(iban)}",${amount.trim() ? `\n  amount: ${amount},` : ''}${particulars.trim() ? `\n  particulars: "${escapeForCode(particulars.trim())}",` : ''}
+  iban: "${escapeForCode(iban)}",${amount.trim() ? `\n  amount: ${amount},\n  expiresAt: new Date(${expiresAt.getFullYear()}, ${expiresAt.getMonth()}, ${expiresAt.getDate()}, 23, 59),` : ''}${particulars.trim() ? `\n  particulars: "${escapeForCode(particulars.trim())}",` : ''}
 });
 // → "${created.payload ?? ''}"`
       : `import { parseRaastQr } from "pakdatakit";
 
 parseRaastQr(payload);
-// → ${parsed ? `{ kind: "${parsed.kind}", crcValid: ${parsed.crcValid}, iban: ${parsed.iban ? `"${parsed.iban}"` : 'null'}, amount: ${parsed.amount} }` : 'null'}`
+// → ${parsed ? `{ kind: "${parsed.kind}", crcValid: ${parsed.crcValid}, iban: ${parsed.iban ? `"${parsed.iban}"` : 'null'}, amount: ${parsed.amount}${parsed.expiresAt ? `, expiresAt: "${parsed.expiresAt}"` : ''} }` : 'null'}`
 
   return (
     <PlaygroundShell
@@ -109,6 +118,22 @@ parseRaastQr(payload);
                   placeholder="Amount in PKR (optional)"
                   className={monoInputClassName}
                 />
+                {amount.trim() && (
+                  <label className="flex items-center gap-3 text-sm text-text-muted">
+                    <span className="shrink-0">Valid for</span>
+                    <select
+                      aria-label="Valid for"
+                      value={validDays}
+                      onChange={(e) => setValidDays(e.target.value)}
+                      className={inputClassName}
+                    >
+                      <option value="1">1 day</option>
+                      <option value="7">7 days</option>
+                      <option value="30">30 days</option>
+                      <option value="90">90 days</option>
+                    </select>
+                  </label>
+                )}
                 <input
                   aria-label="Description"
                   type="text"
@@ -180,6 +205,9 @@ parseRaastQr(payload);
               />
               <OutputRow label="IBAN" value={parsed?.iban ?? ''} />
               <OutputRow label="Amount" value={parsed?.amount != null ? String(parsed.amount) : ''} />
+              {parsed?.expiresAt && (
+                <OutputRow label="Expires" value={parsed.expiresAt.replace('T', ' ')} />
+              )}
               {parsed?.merchantName && (
                 <OutputRow label="Merchant" value={parsed.merchantName} mono={false} />
               )}
