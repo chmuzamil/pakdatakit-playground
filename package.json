@@ -7,11 +7,13 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:flutter-demo": "node scripts/build-flutter-demo.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
     "pakdatakit": "^2.2.0",
+    "pakdatakit-faker": "^0.1.0",
     "pakdatakit-react": "^0.1.0",
     "qrcode": "^1.5.4",
     "react": "^19.2.6",
