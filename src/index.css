@@ -5,6 +5,7 @@
   --color-surface-raised: #161b22;
   --color-surface-overlay: #21262d;
   --color-border: #30363d;
+  --color-border-strong: #6e7681;
   --color-border-muted: #21262d;
   --color-text: #c9d1d9;
   --color-text-muted: #8b949e;
@@ -13,14 +14,42 @@
   --color-accent-muted: #388bfd26;
   --color-success: #3fb950;
   --color-success-muted: #23863633;
-  --color-error: #f85149;
+  --color-error: #ff7b72;
   --color-error-muted: #da363333;
   --color-code: #161b22;
+  --color-brand: #3fb950;
   --font-mono: 'Cascadia Code', 'Fira Code', ui-monospace, Consolas, monospace;
 }
 
 * {
   box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Hides a scrollbar while keeping the element scrollable. */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 html,

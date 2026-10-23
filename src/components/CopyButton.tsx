@@ -4,38 +4,49 @@ import { copyToClipboard } from '../utils/examples'
 interface CopyButtonProps {
   value: string
   label?: string
+  /** Show only the icon; `label` becomes the accessible name. */
+  iconOnly?: boolean
   className?: string
 }
 
-export function CopyButton({ value, label = 'Copy', className = '' }: CopyButtonProps) {
-  const [copied, setCopied] = useState(false)
+export function CopyButton({
+  value,
+  label = 'Copy',
+  iconOnly = false,
+  className = '',
+}: CopyButtonProps) {
+  const [status, setStatus] = useState<'idle' | 'copied' | 'failed'>('idle')
 
   async function handleCopy() {
-    const ok = await copyToClipboard(value)
-    if (!ok) return
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 1500)
+    setStatus((await copyToClipboard(value)) ? 'copied' : 'failed')
+    window.setTimeout(() => setStatus('idle'), 1500)
   }
 
+  const text = status === 'copied' ? 'Copied' : status === 'failed' ? 'Copy failed' : label
+
   return (
-    <button
-      type="button"
-      onClick={handleCopy}
-      disabled={!value}
-      className={`inline-flex items-center gap-1.5 rounded-md border border-border bg-surface-raised px-2.5 py-1 text-xs font-medium text-text-muted transition-colors hover:border-accent/40 hover:text-text-heading disabled:cursor-not-allowed disabled:opacity-40 ${className}`}
-    >
-      {copied ? (
-        <>
-          <CheckIcon />
-          Copied
-        </>
-      ) : (
-        <>
-          <CopyIcon />
-          {label}
-        </>
-      )}
-    </button>
+    <>
+      <button
+        type="button"
+        onClick={handleCopy}
+        disabled={!value}
+        aria-label={iconOnly ? label : undefined}
+        title={iconOnly ? label : undefined}
+        className={
+          iconOnly
+            ? `grid size-8 shrink-0 place-items-center rounded-md text-text-muted transition-colors hover:bg-surface-raised hover:text-text-heading disabled:cursor-not-allowed disabled:opacity-40 ${
+                status === 'copied' ? 'text-success' : ''
+              } ${className}`
+            : `inline-flex min-h-8 shrink-0 items-center gap-1.5 rounded-md border border-border bg-surface-raised px-2.5 text-xs font-medium text-text-muted transition-colors hover:border-accent/40 hover:text-text-heading disabled:cursor-not-allowed disabled:opacity-40 ${className}`
+        }
+      >
+        {status === 'copied' ? <CheckIcon /> : <CopyIcon />}
+        {!iconOnly && text}
+      </button>
+      <span role="status" className="sr-only">
+        {status === 'copied' ? 'Copied' : status === 'failed' ? 'Copy failed' : ''}
+      </span>
+    </>
   )
 }
 

@@ -5,7 +5,7 @@ import { CodePreview } from '../components/CodePreview'
 import { OutputRow } from '../components/OutputRow'
 import { PlaygroundShell } from '../components/PlaygroundShell'
 import { ResultBadge } from '../components/ResultBadge'
-import { escapeForCode, examples } from '../utils/examples'
+import { escapeForCode, examples, monoInputClassName } from '../utils/examples'
 
 export function CNICPlayground() {
   const [input, setInput] = useState<string>(examples.cnic)
@@ -40,7 +40,7 @@ getCNICInfo("${shown}");
             onChange={(e) => setInput(e.target.value)}
             placeholder="35202-1234567-1"
             spellCheck={false}
-            className="w-full rounded-md border border-border bg-surface px-3 py-2.5 font-mono text-sm text-text-heading outline-none transition-colors placeholder:text-text-muted focus:border-accent"
+            className={monoInputClassName}
           />
           <p className="mt-2 text-xs text-text-muted">
             Try: 35202-1234567-1 · 42101 1234567 2 · ۳۵۲۰۲-۱۲۳۴۵۶۷-۱

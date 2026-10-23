@@ -52,7 +52,7 @@ export function parseDateInput(value: string): Date | null {
 }
 
 export const inputClassName =
-  'w-full rounded-md border border-border bg-surface px-3 py-2.5 text-sm text-text-heading outline-none transition-colors placeholder:text-text-muted focus:border-accent'
+  'w-full rounded-md border border-border-strong/60 bg-surface px-3 py-2.5 text-base text-text-heading transition-colors placeholder:text-text-muted hover:border-border-strong focus:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:text-sm'
 
 export const monoInputClassName = `${inputClassName} font-mono`
 

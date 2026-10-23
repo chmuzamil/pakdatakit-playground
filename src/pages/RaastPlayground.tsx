@@ -128,9 +128,15 @@ validateRaastQr(payload);
           <TabBar tabs={tabs} active={tab} onChange={setTab} />
           {tab === 'create' ? (
             <Card title="Payee" description="Person-to-person Raast QR for an IBAN.">
-              <div className="space-y-3">
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-text" htmlFor="raast-iban">
+                  IBAN
+                </label>
                 <input
-                  aria-label="IBAN"
+                  id="raast-iban"
+                  name="iban"
+                  autoComplete="off"
+                  autoCapitalize="characters"
                   type="text"
                   value={iban}
                   onChange={(e) => setIban(e.target.value)}
@@ -138,20 +144,24 @@ validateRaastQr(payload);
                   spellCheck={false}
                   className={monoInputClassName}
                 />
+                <label className="mt-4 mb-1.5 block text-sm font-medium text-text" htmlFor="raast-amount">
+                  Amount in PKR <span className="font-normal text-text-muted">(optional)</span>
+                </label>
                 <input
-                  aria-label="Amount in PKR"
+                  id="raast-amount"
+                  name="amount"
+                  autoComplete="off"
                   type="text"
                   inputMode="decimal"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  placeholder="Amount in PKR (optional)"
+                  placeholder="1500"
                   className={monoInputClassName}
                 />
                 {amount.trim() && (
-                  <label className="flex items-center gap-3 text-sm text-text-muted">
+                  <label className="mt-3 flex items-center gap-3 text-sm text-text-muted">
                     <span className="shrink-0">Valid for</span>
                     <select
-                      aria-label="Valid for"
                       value={validDays}
                       onChange={(e) => setValidDays(e.target.value)}
                       className={inputClassName}
@@ -163,13 +173,18 @@ validateRaastQr(payload);
                     </select>
                   </label>
                 )}
+                <label className="mt-4 mb-1.5 block text-sm font-medium text-text" htmlFor="raast-description">
+                  Description <span className="font-normal text-text-muted">(optional)</span>
+                </label>
                 <input
-                  aria-label="Description"
+                  id="raast-description"
+                  name="description"
+                  autoComplete="off"
                   type="text"
                   value={particulars}
                   maxLength={30}
                   onChange={(e) => setParticulars(e.target.value)}
-                  placeholder="Description (optional)"
+                  placeholder="Rent for March"
                   className={inputClassName}
                 />
               </div>

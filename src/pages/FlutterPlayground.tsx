@@ -114,7 +114,7 @@ export function FlutterPlayground() {
             src="/flutter-demo/index.html"
             title="pakdatakit_flutter live demo"
             loading="lazy"
-            className="h-[640px] w-full rounded-md border border-border bg-surface"
+            className="h-[min(80dvh,760px)] min-h-[480px] w-full rounded-md border border-border bg-surface"
           />
         </Card>
       }

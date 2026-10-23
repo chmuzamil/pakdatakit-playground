@@ -5,7 +5,7 @@ import { CodePreview } from '../components/CodePreview'
 import { CopyButton } from '../components/CopyButton'
 import { OutputRow } from '../components/OutputRow'
 import { PlaygroundShell } from '../components/PlaygroundShell'
-import { examples } from '../utils/examples'
+import { examples, monoInputClassName } from '../utils/examples'
 
 export function CurrencyPlayground() {
   const [input, setInput] = useState(String(examples.amount))
@@ -68,9 +68,7 @@ amountInWords(${shown}, { language: "ur" });
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="2500000"
-            className={`w-full rounded-md border bg-surface px-3 py-2.5 font-mono text-sm text-text-heading outline-none transition-colors placeholder:text-text-muted focus:border-accent ${
-              hasError ? 'border-error' : 'border-border'
-            }`}
+            className={`${monoInputClassName} ${hasError ? 'border-error hover:border-error' : ''}`}
           />
           {hasError ? (
             <p className="mt-2 text-xs text-error">Enter a valid numeric amount.</p>
