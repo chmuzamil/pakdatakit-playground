@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      # pakdatakit, pakdatakit-react and pakdatakit-faker usually release together.
+      pakdatakit:
+        patterns: ["pakdatakit*"]
+      dependencies:
+        update-types: [minor, patch]
+    ignore:
+      # typescript-eslint supports TypeScript <6.1 only; revisit when it
+      # supports TypeScript 7.
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
+      # Keep the Node types on the Node version Vercel builds with.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
