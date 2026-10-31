@@ -108,6 +108,7 @@ export function Sidebar() {
           </code>{' '}
           for TypeScript, Python and Dart.
         </p>
+        <NpmLink className="mt-2" />
       </div>
 
       <dialog
@@ -153,9 +154,25 @@ export function Sidebar() {
               </div>
             </section>
           ))}
+          <NpmLink />
         </div>
       </dialog>
     </aside>
+  )
+}
+
+function NpmLink({ className = '' }: { className?: string }) {
+  return (
+    <a
+      href="https://www.npmjs.com/package/pakdatakit"
+      target="_blank"
+      rel="noreferrer"
+      data-umami-event="npm_click"
+      data-umami-event-package="pakdatakit"
+      className={`inline-flex text-xs text-accent hover:underline ${className}`}
+    >
+      pakdatakit on npm →
+    </a>
   )
 }
 
