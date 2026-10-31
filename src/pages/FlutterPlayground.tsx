@@ -84,6 +84,8 @@ export function FlutterPlayground() {
               </ul>
               <a
                 href="https://pub.dev/packages/pakdatakit_flutter"
+                data-umami-event="pub_click"
+                data-umami-event-package="pakdatakit_flutter"
                 target="_blank"
                 rel="noreferrer"
                 className="mt-4 inline-flex text-sm text-accent hover:underline"
@@ -98,6 +100,8 @@ export function FlutterPlayground() {
             >
               <a
                 href="https://pub.dev/packages/pakdatakit"
+                data-umami-event="pub_click"
+                data-umami-event-package="pakdatakit"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex text-sm text-accent hover:underline"

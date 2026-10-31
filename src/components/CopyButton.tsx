@@ -7,6 +7,8 @@ interface CopyButtonProps {
   /** Show only the icon; `label` becomes the accessible name. */
   iconOnly?: boolean
   className?: string
+  /** Called after a successful copy. */
+  onCopied?: () => void
 }
 
 export function CopyButton({
@@ -14,11 +16,14 @@ export function CopyButton({
   label = 'Copy',
   iconOnly = false,
   className = '',
+  onCopied,
 }: CopyButtonProps) {
   const [status, setStatus] = useState<'idle' | 'copied' | 'failed'>('idle')
 
   async function handleCopy() {
-    setStatus((await copyToClipboard(value)) ? 'copied' : 'failed')
+    const copied = await copyToClipboard(value)
+    setStatus(copied ? 'copied' : 'failed')
+    if (copied) onCopied?.()
     window.setTimeout(() => setStatus('idle'), 1500)
   }
 
