@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  pakdatakit: 2.2.0
+  pakdatakit: 2.2.1
   pakdatakit_flutter: 0.1.0
 
 dev_dependencies:

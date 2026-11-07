@@ -38,7 +38,7 @@ TextFormField(
 
 const dartCode = `# pubspec.yaml
 dependencies:
-  pakdatakit: ^2.2.0
+  pakdatakit: ^2.2.1
 
 // Dart: same functions and data as the npm and Python packages
 import 'package:pakdatakit/pakdatakit.dart';

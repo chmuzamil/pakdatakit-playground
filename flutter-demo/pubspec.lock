@@ -127,10 +127,10 @@ packages:
     dependency: "direct main"
     description:
       name: pakdatakit
-      sha256: fd7b77094aa2ca3c0f0c1e7ff2fa7b2bb257ecc1bf3cefb2cc187025311b246e
+      sha256: "54c374f870122f5af23ef5664fa6f914c341a364fe1c38ea7519b281a9c417d9"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.2.1"
   pakdatakit_flutter:
     dependency: "direct main"
     description:
