@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="glow" cx="0.18" cy="0.05" r="0.9">
+      <stop offset="0" stop-color="#58a6ff" stop-opacity="0.22"/>
+      <stop offset="0.55" stop-color="#58a6ff" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="#58a6ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.95" cy="1" r="0.6">
+      <stop offset="0" stop-color="#3fb950" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#3fb950" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#f0f6fc" stroke-opacity="0.035" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0d1117"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- Brand -->
+  <rect x="72" y="72" width="64" height="64" rx="14" fill="#3fb950" fill-opacity="0.15" stroke="#3fb950" stroke-opacity="0.45" stroke-width="2"/>
+  <text x="104" y="114" text-anchor="middle" font-family="Cascadia Code, Consolas, monospace" font-size="26" font-weight="700" fill="#3fb950">PK</text>
+  <text x="156" y="100" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="600" fill="#f0f6fc">PakDataKit</text>
+  <text x="156" y="128" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#8b949e">Playground</text>
+
+  <!-- Headline -->
+  <text font-family="Segoe UI, Arial, sans-serif" font-size="50" font-weight="700" fill="#f0f6fc" letter-spacing="-1">
+    <tspan x="72" y="248">Pakistani data,</tspan>
+    <tspan x="72" y="310">validated in your browser</tspan>
+  </text>
+  <text x="72" y="374" font-family="Segoe UI, Arial, sans-serif" font-size="25" fill="#8b949e">CNICs, phone numbers, IBANs, Raast QR codes, holidays</text>
+  <text x="72" y="408" font-family="Segoe UI, Arial, sans-serif" font-size="25" fill="#8b949e">and realistic test data. Free and open source.</text>
+
+  <!-- Feature chips -->
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="600">
+    <rect x="72" y="452" width="92" height="40" rx="20" fill="#388bfd" fill-opacity="0.15" stroke="#58a6ff" stroke-opacity="0.4"/>
+    <text x="118" y="478" text-anchor="middle" fill="#79c0ff">CNIC</text>
+    <rect x="176" y="452" width="98" height="40" rx="20" fill="#388bfd" fill-opacity="0.15" stroke="#58a6ff" stroke-opacity="0.4"/>
+    <text x="225" y="478" text-anchor="middle" fill="#79c0ff">Phone</text>
+    <rect x="286" y="452" width="84" height="40" rx="20" fill="#388bfd" fill-opacity="0.15" stroke="#58a6ff" stroke-opacity="0.4"/>
+    <text x="328" y="478" text-anchor="middle" fill="#79c0ff">IBAN</text>
+    <rect x="382" y="452" width="136" height="40" rx="20" fill="#3fb950" fill-opacity="0.15" stroke="#3fb950" stroke-opacity="0.45"/>
+    <text x="450" y="478" text-anchor="middle" fill="#56d364">Raast QR</text>
+    <rect x="530" y="452" width="96" height="40" rx="20" fill="#388bfd" fill-opacity="0.15" stroke="#58a6ff" stroke-opacity="0.4"/>
+    <text x="578" y="478" text-anchor="middle" fill="#79c0ff">Faker</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="72" y="566" font-family="Segoe UI, Arial, sans-serif" font-size="21" fill="#8b949e">TypeScript · Python · Dart &amp; Flutter</text>
+  <text x="1128" y="566" text-anchor="end" font-family="Cascadia Code, Consolas, monospace" font-size="21" fill="#58a6ff">pakdatakit-playground.vercel.app</text>
+
+  <!-- Result card -->
+  <g transform="translate(756 92)">
+    <rect width="372" height="364" rx="18" fill="#21262d" stroke="#58a6ff" stroke-opacity="0.35" stroke-width="2"/>
+    <text x="28" y="48" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" fill="#8b949e" letter-spacing="1.5">RESULT</text>
+    <rect x="28" y="66" width="104" height="30" rx="15" fill="#238636" fill-opacity="0.25" stroke="#3fb950" stroke-opacity="0.4"/>
+    <path d="M44 81l5 5 10-10" fill="none" stroke="#56d364" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="68" y="87" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" fill="#56d364" letter-spacing="1">VALID</text>
+
+    <g font-family="Segoe UI, Arial, sans-serif" font-size="18">
+      <text x="28" y="148" fill="#8b949e">CNIC</text>
+      <text x="344" y="148" text-anchor="end" font-family="Cascadia Code, Consolas, monospace" fill="#f0f6fc">35202-1234567-1</text>
+      <line x1="28" y1="170" x2="344" y2="170" stroke="#30363d"/>
+      <text x="28" y="208" fill="#8b949e">Province</text>
+      <text x="344" y="208" text-anchor="end" fill="#f0f6fc">Punjab</text>
+      <line x1="28" y1="230" x2="344" y2="230" stroke="#30363d"/>
+      <text x="28" y="268" fill="#8b949e">Gender</text>
+      <text x="344" y="268" text-anchor="end" fill="#f0f6fc">Male</text>
+      <line x1="28" y1="290" x2="344" y2="290" stroke="#30363d"/>
+      <text x="28" y="328" fill="#8b949e">Bank (IBAN)</text>
+      <text x="344" y="328" text-anchor="end" fill="#f0f6fc">Standard Chartered</text>
+    </g>
+  </g>
+</svg>
