@@ -1,5 +1,14 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
+import { PassportPlatesPlayground } from './pages/PassportPlatesPlayground'
+import { PostOfficesPlayground } from './pages/PostOfficesPlayground'
+import { CodChecksPlayground } from './pages/CodChecksPlayground'
+import { CourierPlayground } from './pages/CourierPlayground'
+import { BillsPlayground } from './pages/BillsPlayground'
+import { SalesTaxPlayground } from './pages/SalesTaxPlayground'
+import { IncomeTaxPlayground } from './pages/IncomeTaxPlayground'
+import { FbrInvoicePlayground } from './pages/FbrInvoicePlayground'
+import { SlugifyPlayground } from './pages/SlugifyPlayground'
 import { AddressPlayground } from './pages/AddressPlayground'
 import { CNICPlayground } from './pages/CNICPlayground'
 import { CurrencyPlayground } from './pages/CurrencyPlayground'
@@ -40,6 +49,15 @@ export default function App() {
         <Route path="flutter" element={<FlutterPlayground />} />
         <Route path="numbers" element={<NumbersPlayground />} />
         <Route path="raast" element={<RaastPlayground />} />
+        <Route path="passport-plates" element={<PassportPlatesPlayground />} />
+        <Route path="post-offices" element={<PostOfficesPlayground />} />
+        <Route path="cod" element={<CodChecksPlayground />} />
+        <Route path="courier" element={<CourierPlayground />} />
+        <Route path="bills" element={<BillsPlayground />} />
+        <Route path="sales-tax" element={<SalesTaxPlayground />} />
+        <Route path="income-tax" element={<IncomeTaxPlayground />} />
+        <Route path="fbr-invoice" element={<FbrInvoicePlayground />} />
+        <Route path="slugify" element={<SlugifyPlayground />} />
       </Route>
     </Routes>
   )
