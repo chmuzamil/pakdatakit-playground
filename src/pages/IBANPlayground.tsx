@@ -16,6 +16,7 @@ const typeLabels: Record<BankType, string> = {
   foreign: 'Foreign bank (Pakistan branch)',
   specialized: 'Specialized bank',
   central: 'Central bank',
+  'public-sector': 'Public-sector bank',
 }
 
 export function IBANPlayground() {

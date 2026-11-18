@@ -27,7 +27,7 @@ export const navSections: readonly { label: string; items: readonly NavItem[] }[
     label: 'Identity',
     items: [
       { to: '/cnic', label: 'CNIC Validator & Info', icon: 'id' },
-      { to: '/tax', label: 'NTN & STRN', icon: 'tax' },
+      { to: '/passport-plates', label: 'Passport & Vehicle Plates', icon: 'id' },
       { to: '/forms', label: 'Form Inputs', icon: 'form' },
     ],
   },
@@ -44,7 +44,10 @@ export const navSections: readonly { label: string; items: readonly NavItem[] }[
     items: [
       { to: '/geo', label: 'Geo Lookup', icon: 'map' },
       { to: '/postal', label: 'Postal Codes', icon: 'postal' },
+      { to: '/post-offices', label: 'Post Offices & Tehsils', icon: 'postal' },
       { to: '/address', label: 'Address Parser', icon: 'address' },
+      { to: '/cod', label: 'COD Checks', icon: 'address' },
+      { to: '/courier', label: 'Courier Cities (experimental)', icon: 'map' },
     ],
   },
   {
@@ -53,12 +56,23 @@ export const navSections: readonly { label: string; items: readonly NavItem[] }[
       { to: '/currency', label: 'Currency & Words', icon: 'currency' },
       { to: '/iban', label: 'IBAN Validator', icon: 'bank' },
       { to: '/raast', label: 'Raast QR & Checker', icon: 'qr' },
+      { to: '/bills', label: 'Electricity & Gas Bills', icon: 'bank' },
+    ],
+  },
+  {
+    label: 'Tax & FBR',
+    items: [
+      { to: '/tax', label: 'NTN & STRN', icon: 'tax' },
+      { to: '/sales-tax', label: 'Sales Tax', icon: 'tax' },
+      { to: '/income-tax', label: 'Salary Income Tax', icon: 'tax' },
+      { to: '/fbr-invoice', label: 'FBR Invoice Validator', icon: 'tax' },
     ],
   },
   {
     label: 'Locale',
     items: [
       { to: '/text', label: 'Text Utils', icon: 'text' },
+      { to: '/slugify', label: 'Urdu Slugify', icon: 'text' },
       { to: '/hijri', label: 'Hijri Calendar', icon: 'calendar' },
       { to: '/holidays', label: 'Public Holidays', icon: 'star' },
     ],
