@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
-    "pakdatakit": "^2.5.0",
+    "pakdatakit": "^2.5.1",
     "pakdatakit-faker": "^0.2.0",
     "pakdatakit-react": "^0.2.0",
     "qrcode": "^1.5.4",
