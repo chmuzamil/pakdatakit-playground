@@ -1,5 +1,7 @@
 # React + TypeScript + Vite
 
+> **Moved.** The playground now lives at https://pakdatakit.dev/playground/. This project only redirects: each old route (`/cnic`, `/iban`, …) goes to its new page with a 308, `/flutter` goes to https://pakdatakit.dev/install/flutter/, and anything else to https://pakdatakit.dev/playground/ (see `vercel.json`).
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
