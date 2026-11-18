@@ -1,3 +1,275 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://pakdatakit.dev/playground/",
+      "permanent": true
+    },
+    {
+      "source": "/cnic",
+      "destination": "https://pakdatakit.dev/playground/cnic/",
+      "permanent": true
+    },
+    {
+      "source": "/cnic/",
+      "destination": "https://pakdatakit.dev/playground/cnic/",
+      "permanent": true
+    },
+    {
+      "source": "/phone",
+      "destination": "https://pakdatakit.dev/playground/phone/",
+      "permanent": true
+    },
+    {
+      "source": "/phone/",
+      "destination": "https://pakdatakit.dev/playground/phone/",
+      "permanent": true
+    },
+    {
+      "source": "/whatsapp",
+      "destination": "https://pakdatakit.dev/playground/whatsapp/",
+      "permanent": true
+    },
+    {
+      "source": "/whatsapp/",
+      "destination": "https://pakdatakit.dev/playground/whatsapp/",
+      "permanent": true
+    },
+    {
+      "source": "/geo",
+      "destination": "https://pakdatakit.dev/playground/geo/",
+      "permanent": true
+    },
+    {
+      "source": "/geo/",
+      "destination": "https://pakdatakit.dev/playground/geo/",
+      "permanent": true
+    },
+    {
+      "source": "/postal",
+      "destination": "https://pakdatakit.dev/playground/postal/",
+      "permanent": true
+    },
+    {
+      "source": "/postal/",
+      "destination": "https://pakdatakit.dev/playground/postal/",
+      "permanent": true
+    },
+    {
+      "source": "/address",
+      "destination": "https://pakdatakit.dev/playground/address/",
+      "permanent": true
+    },
+    {
+      "source": "/address/",
+      "destination": "https://pakdatakit.dev/playground/address/",
+      "permanent": true
+    },
+    {
+      "source": "/currency",
+      "destination": "https://pakdatakit.dev/playground/currency/",
+      "permanent": true
+    },
+    {
+      "source": "/currency/",
+      "destination": "https://pakdatakit.dev/playground/currency/",
+      "permanent": true
+    },
+    {
+      "source": "/iban",
+      "destination": "https://pakdatakit.dev/playground/iban/",
+      "permanent": true
+    },
+    {
+      "source": "/iban/",
+      "destination": "https://pakdatakit.dev/playground/iban/",
+      "permanent": true
+    },
+    {
+      "source": "/text",
+      "destination": "https://pakdatakit.dev/playground/text/",
+      "permanent": true
+    },
+    {
+      "source": "/text/",
+      "destination": "https://pakdatakit.dev/playground/text/",
+      "permanent": true
+    },
+    {
+      "source": "/hijri",
+      "destination": "https://pakdatakit.dev/playground/hijri/",
+      "permanent": true
+    },
+    {
+      "source": "/hijri/",
+      "destination": "https://pakdatakit.dev/playground/hijri/",
+      "permanent": true
+    },
+    {
+      "source": "/holidays",
+      "destination": "https://pakdatakit.dev/playground/holidays/",
+      "permanent": true
+    },
+    {
+      "source": "/holidays/",
+      "destination": "https://pakdatakit.dev/playground/holidays/",
+      "permanent": true
+    },
+    {
+      "source": "/tax",
+      "destination": "https://pakdatakit.dev/playground/tax/",
+      "permanent": true
+    },
+    {
+      "source": "/tax/",
+      "destination": "https://pakdatakit.dev/playground/tax/",
+      "permanent": true
+    },
+    {
+      "source": "/forms",
+      "destination": "https://pakdatakit.dev/playground/forms/",
+      "permanent": true
+    },
+    {
+      "source": "/forms/",
+      "destination": "https://pakdatakit.dev/playground/forms/",
+      "permanent": true
+    },
+    {
+      "source": "/faker",
+      "destination": "https://pakdatakit.dev/playground/faker/",
+      "permanent": true
+    },
+    {
+      "source": "/faker/",
+      "destination": "https://pakdatakit.dev/playground/faker/",
+      "permanent": true
+    },
+    {
+      "source": "/numbers",
+      "destination": "https://pakdatakit.dev/playground/numbers/",
+      "permanent": true
+    },
+    {
+      "source": "/numbers/",
+      "destination": "https://pakdatakit.dev/playground/numbers/",
+      "permanent": true
+    },
+    {
+      "source": "/raast",
+      "destination": "https://pakdatakit.dev/playground/raast/",
+      "permanent": true
+    },
+    {
+      "source": "/raast/",
+      "destination": "https://pakdatakit.dev/playground/raast/",
+      "permanent": true
+    },
+    {
+      "source": "/passport-plates",
+      "destination": "https://pakdatakit.dev/playground/passport-plates/",
+      "permanent": true
+    },
+    {
+      "source": "/passport-plates/",
+      "destination": "https://pakdatakit.dev/playground/passport-plates/",
+      "permanent": true
+    },
+    {
+      "source": "/post-offices",
+      "destination": "https://pakdatakit.dev/playground/post-offices/",
+      "permanent": true
+    },
+    {
+      "source": "/post-offices/",
+      "destination": "https://pakdatakit.dev/playground/post-offices/",
+      "permanent": true
+    },
+    {
+      "source": "/cod",
+      "destination": "https://pakdatakit.dev/playground/cod/",
+      "permanent": true
+    },
+    {
+      "source": "/cod/",
+      "destination": "https://pakdatakit.dev/playground/cod/",
+      "permanent": true
+    },
+    {
+      "source": "/courier",
+      "destination": "https://pakdatakit.dev/playground/courier/",
+      "permanent": true
+    },
+    {
+      "source": "/courier/",
+      "destination": "https://pakdatakit.dev/playground/courier/",
+      "permanent": true
+    },
+    {
+      "source": "/bills",
+      "destination": "https://pakdatakit.dev/playground/bills/",
+      "permanent": true
+    },
+    {
+      "source": "/bills/",
+      "destination": "https://pakdatakit.dev/playground/bills/",
+      "permanent": true
+    },
+    {
+      "source": "/sales-tax",
+      "destination": "https://pakdatakit.dev/playground/sales-tax/",
+      "permanent": true
+    },
+    {
+      "source": "/sales-tax/",
+      "destination": "https://pakdatakit.dev/playground/sales-tax/",
+      "permanent": true
+    },
+    {
+      "source": "/income-tax",
+      "destination": "https://pakdatakit.dev/playground/income-tax/",
+      "permanent": true
+    },
+    {
+      "source": "/income-tax/",
+      "destination": "https://pakdatakit.dev/playground/income-tax/",
+      "permanent": true
+    },
+    {
+      "source": "/fbr-invoice",
+      "destination": "https://pakdatakit.dev/playground/fbr-invoice/",
+      "permanent": true
+    },
+    {
+      "source": "/fbr-invoice/",
+      "destination": "https://pakdatakit.dev/playground/fbr-invoice/",
+      "permanent": true
+    },
+    {
+      "source": "/slugify",
+      "destination": "https://pakdatakit.dev/playground/slugify/",
+      "permanent": true
+    },
+    {
+      "source": "/slugify/",
+      "destination": "https://pakdatakit.dev/playground/slugify/",
+      "permanent": true
+    },
+    {
+      "source": "/flutter",
+      "destination": "https://pakdatakit.dev/install/flutter/",
+      "permanent": true
+    },
+    {
+      "source": "/flutter/",
+      "destination": "https://pakdatakit.dev/install/flutter/",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://pakdatakit.dev/playground/",
+      "permanent": true
+    }
+  ]
 }
